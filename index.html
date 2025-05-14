@@ -1,0 +1,1701 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>גף קישור ובחינה - חיל האוויר</title>
+    <link rel="icon" href="https://www.iaf.org.il/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="https://www.iaf.org.il/favicon.ico" type="image/x-icon">
+    <style>
+        :root {
+            --primary: #003e7e;
+            --secondary: #0078d7;
+            --accent: #64b5f6;
+            --light-bg: #f0f8ff;
+            --dark-bg: #1a2a3a;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --danger: #f44336;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--text-light);
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            height: 70px;
+            margin-left: 15px;
+        }
+        
+        .header-title h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header-title p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* Decorative elements */
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            overflow: hidden;
+        }
+        
+        .header-bg::before {
+            content: "";
+            position: absolute;
+            width: 300%;
+            height: 300%;
+            top: -100%;
+            left: -100%;
+            background-image: 
+                radial-gradient(circle, rgba(255,255,255,0.2) 1px, transparent 1px),
+                radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px, 40px 40px;
+            animation: bgMove 60s linear infinite;
+        }
+        
+        @keyframes bgMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: var(--dark-bg);
+            padding: 0.8rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin: 0 1rem;
+        }
+        
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0.8rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-links a:hover::after {
+            width: 80%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0;
+            background: linear-gradient(rgba(0, 62, 126, 0.8), rgba(0, 120, 215, 0.8)), url('https://via.placeholder.com/1920x1080');
+            background-size: cover;
+            background-position: center;
+            color: var(--text-light);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .hero-btn {
+            display: inline-block;
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            color: var(--text-light);
+        }
+        
+        .hero-btn:first-child {
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            box-shadow: 0 4px 15px rgba(0, 120, 215, 0.4);
+        }
+        
+        .hero-btn:last-child {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            backdrop-filter: blur(5px);
+        }
+        
+        .hero-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            transition: all 0.6s ease;
+        }
+        
+        .hero-btn:hover::before {
+            left: 100%;
+        }
+        
+        .hero-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Floating particles */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 4rem 0;
+            background-color: #ffffff;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.8rem;
+        }
+        
+        .section-title h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, var(--secondary), var(--accent));
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
+        }
+        
+        .service-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            z-index: 2;
+        }
+        
+        .service-content {
+            padding: 1.5rem;
+        }
+        
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background-color: var(--light-bg);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.2rem;
+            color: var(--secondary);
+            font-size: 2rem;
+        }
+        
+        .service-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+        
+        .service-card p {
+            color: var(--text-dark);
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+        
+        /* Improved cards hover effect */
+        .service-card:hover::after {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .service-card::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--secondary), var(--accent));
+            opacity: 0;
+            transform: translateY(5px);
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+        
+        /* Apps Section */
+        .apps {
+            padding: 4rem 0;
+            background-color: var(--light-bg);
+        }
+        
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .app-card {
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .app-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .app-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--text-light);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .app-header::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(30%, -30%);
+        }
+        
+        .app-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .app-header p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .app-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .app-body p {
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            opacity: 0.8;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+        .app-btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .app-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255, 255, 255, 0.4),
+                transparent
+            );
+            transition: all 0.8s ease;
+        }
+        
+        .app-btn:hover::before {
+            left: 100%;
+        }
+        
+        .app-btn:hover {
+            box-shadow: 0 5px 15px rgba(0, 62, 126, 0.3);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+        
+        .footer-info h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        .footer-info p {
+            line-height: 1.6;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-info {
+            list-style: none;
+        }
+        
+        .contact-info li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-info li i {
+            margin-left: 0.5rem;
+            color: var(--accent);
+        }
+        
+        .footer-links h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+        
+        .footer-links h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: var(--text-light);
+            opacity: 0.8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--accent);
+            padding-right: 0.5rem;
+        }
+        
+        .footer-links a::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            right: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .footer-links a:hover::after {
+            width: 100%;
+            right: auto;
+            left: 0;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.5rem;
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        /* Modal Login */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal.active .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        .modal-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-header h3 {
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+        
+        .modal-body form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(0, 120, 215, 0.2);
+            outline: none;
+        }
+        
+        .form-group.active-input label {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        .login-btn {
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .login-btn:hover {
+            box-shadow: 0 5px 15px rgba(0, 62, 126, 0.3);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+            transition: all 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: var(--danger);
+        }
+        
+        .error-message {
+            color: var(--danger);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        
+        /* Icons */
+        .lock-icon {
+            font-size: 0.9em;
+            margin-right: 0.4rem;
+            opacity: 0.9;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        
+        .btn-icon {
+            margin-right: 0.5rem;
+            font-size: 0.9em;
+        }
+        
+        /* Form Styles Enhancement */
+        .form-group {
+            position: relative;
+        }
+        
+        .form-group input:focus + .form-highlight,
+        .form-group textarea:focus + .form-highlight {
+            width: 100%;
+        }
+        
+        .form-highlight {
+            position: absolute;
+            height: 2px;
+            width: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(to right, var(--secondary), var(--accent));
+            transition: width 0.3s ease;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            transition: box-shadow 0.3s ease, border 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(0, 120, 215, 0.2);
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        /* Tooltip style */
+        [data-tooltip] {
+            position: relative;
+            cursor: help;
+        }
+        
+        [data-tooltip]::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: calc(100% + 5px);
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+            width: max-content;
+            max-width: 250px;
+            z-index: 10;
+        }
+        
+        [data-tooltip]::before {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 5px;
+            border-style: solid;
+            border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        
+        [data-tooltip]:hover::after,
+        [data-tooltip]:hover::before {
+            opacity: 1;
+        }
+        
+        /* Glowing effect */
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 5px rgba(0, 120, 215, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(0, 120, 215, 0.8);
+            }
+            100% {
+                box-shadow: 0 0 5px rgba(0, 120, 215, 0.5);
+            }
+        }
+        
+        .glow-effect {
+            animation: glow 2s infinite;
+        }
+        
+        /* ScrollToTop button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            color: var(--text-light);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 99;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .scroll-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .scroll-to-top:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Loading indicator */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--light-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(0, 62, 126, 0.2);
+            border-radius: 50%;
+            border-top-color: var(--secondary);
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        /* Animation Classes */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.5s ease forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.1s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.3s;
+        }
+        
+        .delay-4 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-5 {
+            animation-delay: 0.5s;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .header-title h1 {
+                font-size: 1.8rem;
+            }
+            
+            .logo {
+                height: 60px;
+            }
+            
+            .hero h2 {
+                font-size: 2.4rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-title h1 {
+                font-size: 1.6rem;
+            }
+            
+            .header-title p {
+                font-size: 1rem;
+            }
+            
+            .logo {
+                height: 50px;
+            }
+            
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--dark-bg);
+                padding: 1rem 0;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 0.5rem 0;
+                text-align: center;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .hero-btn {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo-container {
+                margin-bottom: 1rem;
+            }
+            
+            .header-title h1 {
+                font-size: 1.4rem;
+            }
+            
+            .services-grid,
+            .apps-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-info h3::after,
+            .footer-links h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+                right: auto;
+            }
+            
+            .contact-info li {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader">
+        <div class="spinner"></div>
+    </div>
+    
+    <!-- Scroll to top button -->
+    <div class="scroll-to-top">
+        <i class="arrow-up">↑</i>
+    </div>
+    
+    <!-- Header -->
+    <header>
+        <div class="header-bg"></div>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <img src="./assets/logo.png" alt="לוגו גף קישור ובחינה" class="logo">
+                </div>
+                <div class="header-title">
+                    <h1>גף קישור ובחינה</h1>
+                    <p>יחידת הקישור והלוגיסטיקה| לה"ב</p>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="nav-container">
+                <ul class="nav-links">
+                    <li><a href="#home">דף הבית</a></li>
+                    <li><a href="#services">שירותים</a></li>
+                    <li><a href="#apps">אפליקציות</a></li>
+                    <li><a href="#contact">יצירת קשר</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    ☰
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="particles" id="particles"></div>
+        <div class="container">
+            <div class="hero-content fade-in-up">
+                <h2>ברוכים הבאים לאתר גף קישור ובחינה</h2>
+                <p> הגורם האחראי ביחידת הקישור והלוגיסטיקה לריכוז הפעילות הדרושה למימוש תוכנית עבודה של חיל האוויר למטוסים, מנועים, מכלולים ושפיצים בדרגי ד' אזרחיים וצבאיים . תוך הקפדה על קיום הזמינות והאיכות הנדרשים יחד עם מיצוי מיטבי של המשאבים.</p>
+
+                <div class="hero-buttons">
+                    <a href="#apps" class="hero-btn pulse">לאפליקציות <i class="btn-icon">⚡</i></a>
+                    <a href="#contact" class="hero-btn">צור קשר <i class="btn-icon">✉️</i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title fade-in-up">
+                <h2>השירותים שלנו</h2>
+            </div>
+            <div class="services-grid">
+                <!-- Service Card 1 -->
+                <div class="service-card fade-in-up delay-1">
+                    <div class="service-content">
+                        <div class="service-icon">
+                            <i>🔗</i>
+                        </div>
+                        <h3>קישור מול תעשיות בטחוניות</h3>
+                        <p>ניהול התקשורת מול מפעלים בטחוניים בהיבטי אחזקת ציוד, ניהול חוזים ומעקב אחר ביצועים.</p>
+                    </div>
+                </div>
+                
+                <!-- Service Card 2 -->
+                <div class="service-card fade-in-up delay-2">
+                    <div class="service-content">
+                        <div class="service-icon">
+                            <i>📊</i>
+                        </div>
+                        <h3>ניהול תקציבים</h3>
+                        <p>אחריות על תכנון וניהול תקציבים מול משרד הביטחון ומעקב אחר הוצאות פרויקטים.</p>
+                    </div>
+                </div>
+                
+                <!-- Service Card 3 -->
+                <div class="service-card fade-in-up delay-3">
+                    <div class="service-content">
+                        <div class="service-icon">
+                            <i>🔍</i>
+                        </div>
+                        <h3>בחינות ציוד</h3>
+                        <p>ביצוע בחינות ציוד על פי תורת הבחינה ותקן האיכות הישראלי למפעלים שאינם מוסמכים לתקן האיכות.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Apps Section -->
+    <section class="apps" id="apps">
+        <div class="container">
+            <div class="section-title fade-in-up">
+                <h2>האפליקציות שלנו</h2>
+            </div>
+            <div class="apps-grid">
+                <!-- App Card 1 -->
+                <div class="app-card fade-in-up delay-1">
+                    <div class="app-header">
+                        <h3>ניהול חשבוניות משהב"ט </h3>
+                        <p>מערכת לניהול חשבוניות משרד הביטחון</p>
+                    </div>
+                    <div class="app-body">
+                        <p>מערכת לניהול, מעקב ואישור חשבוניות מול משרד הביטחון. </p>
+                        <a href="https://script.google.com/macros/s/AKfycbyiHRDoMZxqkcov1RimZoOvR-jsByD4EUEBgKLzSNV3nvLevkDCkk1cEiivPVPIpsW2/exec" target="_blank" class="app-btn">כניסה למערכת </a>
+                    </div>
+                </div>
+                
+                <!-- App Card 2 -->
+                <div class="app-card fade-in-up delay-2">
+                    <div class="app-header">
+                        <h3>יצירת קשר</h3>
+                        <p>שליחת מסמכים ופניות</p>
+                    </div>
+                    <div class="app-body">
+                        <p> ניתן לשלוח מסמכים, בקשות ופניות ישירות לצוות הגף.</p>
+                        <a href="contact.html"target="_blank" class="app-btn">דף קשר</a>
+                    </div>
+                </div>
+                
+                <!-- App Card 3 -->
+                <div class="app-card fade-in-up delay-3">
+                    <div class="app-header">
+                        <h3>משוב לקוחות</h3>
+                        <p>סקר שביעות רצון</p>
+                    </div>
+                    <div class="app-body">
+                        <p>מערכת משוב לקוחות המאפשרת לנו ללמוד ולהשתפר. נשמח לקבל את משובך על השירות שקיבלת.</p>
+                        <a href="https://script.google.com/macros/s/AKfycbyFsKtwobiGGZZM2065bjhRN686vgWqw5LcKb--KmMr_GEu82_dU3d3cKVpDTedYlyvmw/exec" target="_blank" class="app-btn">למילוי משוב</a>
+                    </div>
+                </div>
+                
+                <!-- App Card 4 -->
+                <div class="app-card fade-in-up delay-4">
+                    <div class="app-header">
+                        <h3>מערכת ניהול בחינות</h3>
+                        <p>בקשה לביצוע בחינת ציוד - כניסת מפעלים</p>
+                    </div>
+                    <div class="app-body">
+                        <p>מערכת להגשת בקשות לביצוע בחינות איכות לציוד טרם החזרתו לחיל האוויר.</p>
+                        <a href="https://script.google.com/macros/s/AKfycbw-u6CUzyEISr7roSGWeP5qIOB5dXiODsBOLhfPmyyU1Nglulx5IMXSa6OQguBwNTN0/exec"target="_blank" class="app-btn">כניסה למערכת </a><!-- ADD LINK HERE -->
+                    </div>
+                </div>
+                
+                 <!-- App Card 5 -->
+                 <div class="app-card fade-in-up delay-4">
+                    <div class="app-header">
+                        <h3>בקרה תקציבית </h3>
+                        <p>ניהול ומעקב תקציבים</p>
+                    </div>
+                    <div class="app-body">
+                        <p>מערכת לניהול, מעקב ובקרה אחר תקציבים ופרויקטים מול משרד הביטחון. </p>
+                        <a href="https://script.google.com/macros/s/AKfycbzPEDUP5vLg_r6vBW_9moJp7j5tphHVXkTgWl1BTvhA6LulFEYwNmIszc2C96JUjYcgPQ/exec"target="_blank" class="app-btn">כניסה למערכת</a><!-- ADD LINK HERE -->
+                    </div>
+                </div>
+
+                <!-- App Card 6 -->
+                <div class="app-card fade-in-up delay-5">
+                    <div class="app-header">
+                        <h3>מדדי הגף</h3>
+                        <p>מדדי הגף</p>
+                    </div>
+                    <div class="app-body">
+                        <p>מערכת ניתוח מדדי הגף </p>
+                        <a href="#"target="_blank" class="app-btn"> כניסה</a><!-- ADD LINK HERE -->                    </div>
+                </div>
+
+                <!-- App Card - 7-->
+                <div class="app-card fade-in-up delay-4">
+                    <div class="app-header">
+                        <h3>ניהול סיכונים </h3>
+                        <p>קבצי ניהול סיכונים בגף</p>
+                    </div>
+                    <div class="app-body">
+                        <p>כניסה למורשים - ניהול סיכונים</p>
+                        <a href="https://tikshuv-my.sharepoint.com/personal/321371205_idf_il/_layouts/15/onedrive.aspx?id=%2Fpersonal%2F321371205%5Fidf%5Fil%2FDocuments%2F%D7%A0%D7%99%D7%94%D7%95%D7%9C%20%D7%A1%D7%99%D7%9B%D7%95%D7%A0%D7%99%D7%9D%20%D7%9E%D7%9E%D7%99%20%D7%9E%D7%A9%D7%94%2F%D7%A7%D7%99%D7%A9%D7%95%D7%A8%20%D7%95%D7%91%D7%97%D7%99%D7%A0%D7%94&ga=1"target="_blank" class="app-btn">להזמנת בחינה</a><!-- ADD LINK HERE -->
+                    </div>
+                </div>
+                
+
+                <!-- App Card - 8-->
+                <div class="app-card fade-in-up delay-4">
+                    <div class="app-header">
+                        <h3>מחשבון תורת הבחינה </h3>
+                        <p>חישוב מדגם</p>
+                    </div>
+                    <div class="app-body">
+                        <p>מתבסס על ISO 2859 ומאפשר להזין גודל מנה, AQL, רמת בדיקה ועוד</p>
+                        <a href="https://www.learnleansigma.com/calculator/attribute-sampling-calculator/"target="_blank" class="app-btn">כניסה לאפליקציה</a><!-- ADD LINK HERE -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title fade-in-up">
+                <h2>תיבת פניות - הצעות לשיפור</h2>
+            </div>
+            <div class="contact-content">
+                <div class="contact-form fade-in-up pulse">
+                    <form id="contactForm" action="https://formsubmit.co/kishor.bhina@gmail.com" method="POST">
+                        <div class="form-group">
+                            <label for="name">שם מלא</label>
+                            <input type="text" id="name" name="name" required>
+                            <span class="form-highlight"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">דוא"ל</label>
+                            <input type="email" id="email" name="email" required>
+                            <span class="form-highlight"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">טלפון</label>
+                            <input type="tel" id="phone" name="phone">
+                            <span class="form-highlight"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">נושא</label>
+                            <input type="text" id="subject" name="subject" required>
+                            <span class="form-highlight"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">תוכן ההודעה</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                            <span class="form-highlight"></span>
+                        </div>
+                        <input type="hidden" name="_next" value="https://yourwebsite.com/thanks.html">
+                        <input type="hidden" name="_subject" value="פנייה חדשה מאתר גף קישור ובחינה">
+                        <input type="hidden" name="_captcha" value="false">
+                        <button type="submit" class="app-btn">שלח הודעה <i class="btn-icon">📨</i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>גף קישור ובחינה</h3>
+                    <p>גף קישור ובחינה אחראי על ניהול התקשורת מול מפעלים בטחוניים בהיבטי אחזקת ציוד, ניהול חוזים ותקציבים, וביצוע בחינות איכות.</p>
+                    <ul class="contact-info">
+                        <li><i>✉️</i> דוא"ל: kishor.bhina@gmail.com</li>
+                        <li><i>📍</i>  חיל האוויר - לה"ב</li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>קישורים מהירים</h3>
+                    <ul>
+                        <li><a href="#home">דף הבית</a></li>
+                        <li><a href="#services">השירותים שלנו</a></li>
+                        <li><a href="#apps">אפליקציות</a></li>
+                        <li><a href="#contact">צור קשר</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© כל הזכויות שמורות לגף קישור ובחינה</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <div class="modal-header">
+                <h3 id="modalTitle">כניסה למערכת</h3>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="username">שם משתמש</label>
+                        <input type="text" id="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">סיסמה</label>
+                        <input type="password" id="password" required>
+                    </div>
+                    <div class="error-message" id="loginError">שם משתמש או סיסמה שגויים</div>
+                    <button type="submit" class="login-btn">כניסה</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript -->
+    <script>
+        // Create animated particles
+        document.addEventListener('DOMContentLoaded', function() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random position
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                
+                // Random size
+                const size = Math.random() * 4 + 2;
+                
+                // Random opacity
+                const opacity = Math.random() * 0.5 + 0.2;
+                
+                particle.style.left = posX + '%';
+                particle.style.top = posY + '%';
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.opacity = opacity;
+                
+                // Animation
+                const duration = Math.random() * 20 + 10;
+                const delay = Math.random() * 5;
+                
+                particle.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        });
+        
+        // Add float animation
+        document.head.insertAdjacentHTML('beforeend', `
+        <style>
+            @keyframes float {
+                0%, 100% {
+                    transform: translateY(0) translateX(0);
+                }
+                25% {
+                    transform: translateY(-30px) translateX(15px);
+                }
+                50% {
+                    transform: translateY(-15px) translateX(-15px);
+                }
+                75% {
+                    transform: translateY(30px) translateX(15px);
+                }
+            }
+        </style>
+        `);
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+        
+        // Scroll to top button functionality
+        const scrollToTopBtn = document.querySelector('.scroll-to-top');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('active');
+            } else {
+                scrollToTopBtn.classList.remove('active');
+            }
+        });
+        
+        scrollToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Page loading animation
+        window.addEventListener('load', function() {
+            const loader = document.querySelector('.loader');
+            setTimeout(function() {
+                loader.classList.add('hidden');
+            }, 800);
+        });
+        
+        // Modal functionality
+        const modal = document.getElementById('loginModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const loginForm = document.getElementById('loginForm');
+        const closeModalBtn = document.querySelector('.close-modal');
+        const loginError = document.getElementById('loginError');
+        let currentLoginType = '';
+        
+        // CSV users data
+        let usersHeshbonit = [];
+        let usersPnimi = [];
+        
+        // Function to read CSV files
+        async function readCSVFiles() {
+            try {
+                // Read Heshbonit users CSV
+                const heshbonitResponse = await fetch('./assets/Pass4heshbonit.csv');
+                const heshbonitData = await heshbonitResponse.text();
+                usersHeshbonit = parseCSV(heshbonitData);
+                
+                // Read Pnimi users CSV
+                const pnimiResponse = await fetch('./assets/Pass4pnimi.csv');
+                const pnimiData = await pnimiResponse.text();
+                usersPnimi = parseCSV(pnimiData);
+                
+                console.log('CSV files loaded successfully');
+            } catch (error) {
+                console.error('Error loading CSV files:', error);
+            }
+        }
+        
+        // Parse CSV function
+        function parseCSV(csvData) {
+            const lines = csvData.split('\n');
+            const result = [];
+            
+            // Get headers
+            const headers = lines[0].split(',');
+            
+            // Process each line
+            for (let i = 1; i < lines.length; i++) {
+                if (lines[i].trim() === '') continue;
+                
+                const obj = {};
+                const currentLine = lines[i].split(',');
+                
+                for (let j = 0; j < headers.length; j++) {
+                    obj[headers[j].trim()] = currentLine[j].trim();
+                }
+                
+                result.push(obj);
+            }
+            
+            return result;
+        }
+        
+        // Load CSV files on page load
+        document.addEventListener('DOMContentLoaded', readCSVFiles);
+        
+        // Open modal function
+        function openLoginModal(type) {
+            currentLoginType = type;
+            
+            if (type === 'heshbonit') {
+                modalTitle.textContent = 'כניסה למערכת ניהול חשבוניות משהב"ט';
+            } else if (type === 'pnimi') {
+                modalTitle.textContent = 'כניסה למערכת ניהול פנימי';
+            }
+            
+            modal.classList.add('active');
+            setTimeout(() => {
+                document.querySelector('.modal-content').style.transform = 'scale(1)';
+                document.querySelector('.modal-content').style.opacity = '1';
+            }, 10);
+        }
+        
+        // Close modal
+        closeModalBtn.addEventListener('click', closeModal);
+        
+        function closeModal() {
+            document.querySelector('.modal-content').style.transform = 'scale(0.8)';
+            document.querySelector('.modal-content').style.opacity = '0';
+            setTimeout(() => {
+                modal.classList.remove('active');
+            }, 300);
+            
+            // Reset form
+            loginForm.reset();
+            loginError.style.display = 'none';
+        }
+        
+        // Close modal when clicking outside content
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+        
+        // Handle login form submission
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Determine which user list to check based on current login type
+            const usersList = currentLoginType === 'heshbonit' ? usersHeshbonit : usersPnimi;
+            
+            // Check credentials
+            const user = usersList.find(u => u['שם משתמש'] === username && u['סיסמא'] === password);
+            
+            if (user) {
+                // Authentication successful
+                loginError.style.display = 'none';
+                
+                // Redirect to appropriate page based on login type
+                if (currentLoginType === 'heshbonit') {
+                    // Redirect to heshbonit system
+                    window.location.href = "https://script.google.com/macros/s/AKfycbzbNsc0z_SfU97HEQJstfjaATH7jZHLJ5AJOzNceFgL1Ifn_bydIlNh37lEDSZJ70-x/exec";
+                } else if (currentLoginType === 'pnimi') {
+                    // Redirect to pnimi system
+                    window.location.href = "#"; // UPDATE THIS LINK
+                    alert('התחברת בהצלחה למערכת ניהול פנימי'); // This is temporary, remove when real redirect is added
+                }
+                
+                closeModal();
+            } else {
+                // Authentication failed
+                loginError.style.display = 'block';
+            }
+        });
+        
+        // Reveal animations on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in-up');
+            
+            function checkFade() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight - 50) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }
+                });
+            }
+            
+            // Set initial styles
+            fadeElements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(30px)';
+                element.style.transition = 'all 0.5s ease';
+            });
+            
+            // Check on scroll
+            window.addEventListener('scroll', checkFade);
+            
+            // Check on load
+            checkFade();
+            
+            // Add tooltip functionality
+            const appButtons = document.querySelectorAll('.app-btn');
+            appButtons.forEach(button => {
+                if (button.textContent.includes('🔒')) {
+                    button.setAttribute('data-tooltip', 'כניסה למשתמשים מורשים בלבד');
+                }
+            });
+            
+            // Add glowing effect to specific elements
+            const loginButtons = document.querySelectorAll('.app-btn');
+            loginButtons.forEach(button => {
+                if (button.textContent.includes('כניסה למערכת')) {
+                    button.classList.add('glow-effect');
+                }
+            });
+            
+            // Add form feedback effects
+            const formInputs = document.querySelectorAll('input, textarea');
+            formInputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.classList.add('active-input');
+                });
+                
+                input.addEventListener('blur', function() {
+                    if (this.value === '') {
+                        this.parentElement.classList.remove('active-input');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
