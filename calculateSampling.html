@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מחשבון מדגמים ISO 2859</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="https://www.iaf.org.il/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="https://www.iaf.org.il/favicon.ico" type="image/x-icon">
+
+</head>
+<body>
+    <div class="container">
+        <div class="theme-toggle">
+            <label class="switch">
+                <input type="checkbox" id="theme-switch">
+                <span class="slider round"></span>
+            </label>
+            <span class="theme-label">מצב כהה <i class="fas fa-moon"></i></span>
+        </div>
+
+   
+        <header>
+            <div class="container header-content">
+                <div class="logo-container">
+                    <img src="assets/logo.png" alt="IAF Logo" class="logo">
+                    <div class="header-title">
+                        <h1>גף קישור ובחינה -מחשבון מדגמים לפי תקן ISO 2859</h1>
+                        <p class="subtitle">תכנון מדגמים לבדיקת איכות על פי תקן ISO 2859-1</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="calculator-container">
+                <div class="input-section">
+                    <div class="input-group">
+                        <label for="lot-size"><i class="fas fa-boxes"></i> גודל המנה (Lot Size)</label>
+                        <div class="input-with-icon">
+                            <input type="number" id="lot-size" name="lot-size" min="1" placeholder="הכנס גודל מנה...">
+                            <span class="info-icon" data-tooltip="גודל המנה מתייחס למספר היחידות הכולל במשלוח או בקבוצת המוצרים שמהם יילקח המדגם">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="inspection-level"><i class="fas fa-layer-group"></i> רמת בדיקה (Inspection Level)</label>
+                        <div class="input-with-icon">
+                            <select id="inspection-level" name="inspection-level">
+                                <option value="I">רמה כללית I (נמוכה)</option>
+                                <option value="II" selected>רמה כללית II (רגילה)</option>
+                                <option value="III">רמה כללית III (גבוהה)</option>
+                                <option value="S1">רמה מיוחדת S-1</option>
+                                <option value="S2">רמה מיוחדת S-2</option>
+                                <option value="S3">רמה מיוחדת S-3</option>
+                                <option value="S4">רמה מיוחדת S-4</option>
+                            </select>
+                            <span class="info-icon" data-tooltip="רמת הבדיקה קובעת את גודל המדגם. רמה II היא הרמה הסטנדרטית. רמה I מאפשרת מדגם קטן יותר ורמה III מאפשרת מדגם גדול יותר. רמות מיוחדות S-1 עד S-4 משמשות כאשר נדרשים מדגמים קטנים במיוחד">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="inspection-type"><i class="fas fa-tasks"></i> סוג בדיקה (Inspection Type)</label>
+                        <div class="input-with-icon">
+                            <select id="inspection-type" name="inspection-type">
+                                <option value="normal" selected>רגילה (Normal)</option>
+                                <option value="tightened">מחמירה (Tightened)</option>
+                                <option value="reduced">מופחתת (Reduced)</option>
+                            </select>
+                            <span class="info-icon" data-tooltip="סוג הבדיקה קובע את החומרה של קריטריון הקבלה. בדיקה רגילה היא ברירת המחדל, בדיקה מחמירה משמשת כאשר יש חששות לגבי האיכות, ובדיקה מופחתת משמשת כאשר הספק הוכיח איכות טובה לאורך זמן">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="aql"><i class="fas fa-percent"></i> AQL (גבול איכות קבילה)</label>
+                        <div class="input-with-icon">
+                            <select id="aql" name="aql">
+                                <option value="0.065">0.065%</option>
+                                <option value="0.1">0.1%</option>
+                                <option value="0.15">0.15%</option>
+                                <option value="0.25">0.25%</option>
+                                <option value="0.4">0.4%</option>
+                                <option value="0.65">0.65%</option>
+                                <option value="1.0">1.0%</option>
+                                <option value="1.5">1.5%</option>
+                                <option value="2.5" selected>2.5%</option>
+                                <option value="4.0">4.0%</option>
+                                <option value="6.5">6.5%</option>
+                                <option value="10">10%</option>
+                                <option value="15">15%</option>
+                                <option value="25">25%</option>
+                                <option value="40">40%</option>
+                            </select>
+                            <span class="info-icon" data-tooltip="גבול איכות קבילה (AQL) מייצג את הרמה המרבית של פריטים פגומים שעדיין נחשבת קבילה. ערך AQL נמוך יותר מחייב רמת איכות גבוהה יותר">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <button id="calculate-btn" class="calculate-button">
+                        <i class="fas fa-calculator"></i> חשב מדגם
+                    </button>
+                </div>
+
+                <div class="results-section">
+                    <h2><i class="fas fa-chart-bar"></i> תוצאות החישוב</h2>
+                    <div class="results-container">
+                        <div class="result-group">
+                            <div class="result-item">
+                                <div class="result-label"><i class="fas fa-font"></i> אות קוד לגודל המדגם:</div>
+                                <div id="sample-size-code" class="result-value">-</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="result-label"><i class="fas fa-ruler"></i> גודל המדגם:</div>
+                                <div id="sample-size" class="result-value">-</div>
+                            </div>
+                        </div>
+                        <div class="result-group">
+                            <div class="result-item">
+                                <div class="result-label"><i class="fas fa-check-circle"></i> מספר קבלה (Ac):</div>
+                                <div id="acceptance-number" class="result-value">-</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="result-label"><i class="fas fa-times-circle"></i> מספר דחייה (Re):</div>
+                                <div id="rejection-number" class="result-value">-</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="result-explanation">
+                        <p><strong>פירוש התוצאות:</strong></p>
+                        <p id="result-explanation-text">הזן נתונים לקבלת תוצאות.</p>
+                    </div>
+                    
+                    <div class="visual-result">
+                        <h3><i class="fas fa-chart-pie"></i> תצוגה גרפית</h3>
+                        <div class="chart-container">
+                            <div class="chart-bar accept" id="accept-bar">
+                                <div class="bar-label">קבלה</div>
+                                <div class="bar-value" id="accept-value">0</div>
+                            </div>
+                            <div class="chart-bar reject" id="reject-bar">
+                                <div class="bar-label">דחייה</div>
+                                <div class="bar-value" id="reject-value">0</div>
+                            </div>
+                        </div>
+                        <div class="chart-scale">
+                            <div class="scale-label">0</div>
+                            <div class="scale-line"></div>
+                            <div class="scale-label" id="scale-max">25</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>© 2025 מחשבון מדגמים ISO 2859 | מבוסס על תקן ISO 2859-1</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
