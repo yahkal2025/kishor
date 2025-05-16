@@ -615,3 +615,110 @@ input:checked + .slider:before {
     height: 80px;
     margin-left: 15px;
 }
+/* שיפורים בעיצוב CSS לתמיכה טובה יותר במובייל */
+
+/* שינוי כללי למידות טובות יותר במובייל */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .calculator-container {
+        flex-direction: column;
+        padding: 1.5rem 1rem;
+    }
+
+    .input-section,
+    .results-section {
+        width: 100%;
+        min-width: 100%;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+    }
+
+    .theme-toggle {
+        top: 0.5rem;
+        left: 0.5rem;
+    }
+
+    .logo-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .logo {
+        margin-left: 0;
+        margin-bottom: 15px;
+    }
+
+    .result-group {
+        flex-direction: column;
+    }
+
+    .result-item {
+        min-width: 100%;
+    }
+
+    .header-content {
+        flex-direction: column;
+    }
+
+    .header-title {
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    /* הגדלת גודל הכפתורים והקלט לשימוש קל יותר במגע */
+    input, select, .calculate-button {
+        padding: 1rem;
+        font-size: 1.1rem;
+    }
+
+    .info-icon i {
+        font-size: 1.5rem;
+    }
+
+    /* שיפור התצוגה של הטולטיפ במובייל */
+    .info-icon[data-tooltip]:before {
+        width: 200px;
+        font-size: 0.8rem;
+    }
+}
+
+/* תמיכה בגדלי מסך קטנים עוד יותר */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.4rem;
+    }
+
+    .subtitle {
+        font-size: 0.8rem;
+    }
+
+    .result-value {
+        font-size: 1.1rem;
+    }
+
+    .chart-container {
+        height: 150px;
+    }
+
+    .bar-value {
+        font-size: 1.2rem;
+    }
+
+    /* צמצום המרווחים */
+    .input-group {
+        margin-bottom: 1rem;
+    }
+
+    .calculator-container {
+        gap: 1rem;
+    }
+}
